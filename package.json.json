@@ -1,0 +1,49 @@
+{
+  "name": "iraqi-scouts-house",
+  "version": "1.0.0",
+  "description": "منصة إلكترونية متكاملة لإدارة أنشطة بيت الكشافة العراقي - قيادة، تراث، مستقبل",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server --port=3000",
+    "dev": "live-server --port=3000 --watch=.",
+    "build": "echo 'No build process needed for static site'",
+    "serve": "http-server -p 3000 -c-1"
+  },
+  "keywords": [
+    "scouts",
+    "iraq",
+    "youth",
+    "leadership",
+    "education",
+    "arabic",
+    "community"
+  ],
+  "author": {
+    "name": "بيت الكشافة العراقي",
+    "email": "info@iraqiscouts.org"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "live-server": "^1.2.2",
+    "http-server": "^14.1.1"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iraqiscouts/scouts-house.git"
+  },
+  "bugs": {
+    "url": "https://github.com/iraqiscouts/scouts-house/issues"
+  },
+  "homepage": "https://iraqiscouts.org",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "> 1%",
+    "IE 11"
+  ]
+}

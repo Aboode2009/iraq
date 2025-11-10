@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بيت الكشافة العراقي - قيادة، تراث، مستقبل</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* كل الأنماط السابقة تبقى كما هي */
+        
+        /* أنماط إدارة الموقع */
+        .site-management {
+            background: var(--black-light);
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+            margin-bottom: 2rem;
+        }
+
+        .site-logo-preview {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            padding: 2rem;
+            background: var(--black);
+            border-radius: var(--border-radius);
+            border: 2px dashed rgba(255, 107, 53, 0.3);
+        }
+
+        .current-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .logo-preview-item {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .logo-preview-item h4 {
+            margin-bottom: 0.5rem;
+            color: var(--white);
+        }
+
+        .favicon-preview {
+            width: 32px;
+            height: 32px;
+            background: var(--gradient-primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: var(--white);
+            font-weight: 800;
+            margin: 0 auto;
+        }
+
+        .favicon-preview img {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .header-logo-preview {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+
+        .header-logo-icon img {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
+        .header-logo-text h1 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--white), var(--orange-lighter));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .header-logo-text span {
+            font-size: 0.8rem;
+            color: var(--primary-orange);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- كل المحتوى السابق يبقى كما هو -->
+    
+    <!-- نضيف قسم إدارة الموقع في صفحة البروفايل -->
+    <!-- داخل صفحة البروفايل، بعد قسم معلومات البروفايل العامة -->
+    <div class="site-management" id="siteManagement" style="display: none;">
+        <div class="page-header">
+            <h2>إدارة الموقع</h2>
+            <p>تغيير شعار الموقع والفافيكون (خاص بالمسؤول فقط)</p>
+        </div>
+        
+        <div class="profile-card">
+            <!-- معاينة الشعار الحالي -->
+            <div class="site-logo-preview">
+                <h3>المعاينة الحالية</h3>
+                <div class="current-logo">
+                    <div class="logo-preview-item">
+                        <h4>الفافيكون</h4>
+                        <div class="favicon-preview" id="currentFaviconPreview">
+                            <!-- سيتم تعبئته بالجافاسكريبت -->
+                        </div>
+                        <small>32x32 بكسل</small>
+                    </div>
+                    <div class="logo-preview-item">
+                        <h4>شعار الهيدر</h4>
+                        <div class="header-logo-preview">
+                            <div class="header-logo-icon" id="currentHeaderLogoPreview">
+                                <!-- سيتم تعبئته بالجافاسكريبت -->
+                            </div>
+                            <div class="header-logo-text">
+                                <h1>بيت الكشافة</h1>
+                                <span>العراقي</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- نموذج تغيير الشعار -->
+            <form id="siteLogoForm">
+                <div class="form-group">
+                    <label>تغيير الفافيكون</label>
+                    <div class="file-input">
+                        <div class="file-input-label" id="faviconInputLabel">
+                            <i class="fas fa-image"></i>
+                            <span>اختر صورة الفافيكون</span>
+                        </div>
+                        <input type="file" id="faviconFile" accept="image/*">
+                        <div class="file-name" id="faviconFileName">PNG, JPG, SVG - 32x32 بكسل</div>
+                    </div>
+                    <div class="avatar-preview" id="faviconPreview" style="width: 80px; height: 80px;">
+                        <span>🖼️</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>تغيير شعار الهيدر</label>
+                    <div class="file-input">
+                        <div class="file-input-label" id="headerLogoInputLabel">
+                            <i class="fas fa-image"></i>
+                            <span>اختر صورة الشعار</span>
+                        </div>
+                        <input type="file" id="headerLogoFile" accept="image/*">
+                        <div class="file-name" id="headerLogoFileName">PNG, JPG - 50x50 بكسل</div>
+                    </div>
+                    <div class="avatar-preview" id="headerLogoPreview" style="width: 100px; height: 100px;">
+                        <span>🏕️</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>نص الشعار البديل</label>
+                    <input type="text" id="logoText" placeholder="بيت الكشافة العراقي">
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">
+                    <i class="fas fa-save"></i>
+                    حفظ التغييرات
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- النماذج المنبثقة السابقة تبقى كما هي -->
+
+    <!-- نضيف نموذج تأكيد تغيير الشعار -->
+    <div id="confirmLogoChangeModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>تأكيد تغيير الشعار</h2>
+            <p>هل أنت متأكد من تغيير شعار الموقع؟ هذا التغيير سيظهر لجميع المستخدمين.</p>
+            <div class="form-actions">
+                <button class="btn btn-primary" onclick="app.confirmLogoChange()">نعم، تغيير</button>
+                <button class="btn btn-outline" onclick="app.hideModal('confirmLogoChangeModal')">إلغاء</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // في كلاس ScoutsDatabase نضيف دوال إدارة الشعار
+        class ScoutsDatabase {
+            // ... الدوال السابقة تبقى كما هي
+
+            // دوال إدارة شعار الموقع
+            getSiteSettings() {
+                return JSON.parse(localStorage.getItem('scouts_site_settings') || '{}');
+            }
+
+            updateSiteSettings(settings) {
+                const currentSettings = this.getSiteSettings();
+                const updatedSettings = { ...currentSettings, ...settings };
+                localStorage.setItem('scouts_site_settings', JSON.stringify(updatedSettings));
+                return updatedSettings;
+            }
+
+            getFavicon() {
+                const settings = this.getSiteSettings();
+                return settings.favicon || null;
+            }
+
+            getHeaderLogo() {
+                const settings = this.getSiteSettings();
+                return settings.headerLogo || null;
+            }
+
+            getLogoText() {
+                const settings = this.getSiteSettings();
+                return settings.logoText || 'بيت الكشافة العراقي';
+            }
+
+            storeFavicon(file) {
+                return new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const settings = JSON.parse(localStorage.getItem('scouts_site_settings') || '{}');
+                        settings.favicon = e.target.result;
+                        localStorage.setItem('scouts_site_settings', JSON.stringify(settings));
+                        resolve(settings.favicon);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+
+            storeHeaderLogo(file) {
+                return new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const settings = JSON.parse(localStorage.getItem('scouts_site_settings') || '{}');
+                        settings.headerLogo = e.target.result;
+                        localStorage.setItem('scouts_site_settings', JSON.stringify(settings));
+                        resolve(settings.headerLogo);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+        }
+
+        // في كلاس ScoutsApp نضيف دوال إدارة الشعار
+        class ScoutsApp {
+            constructor() {
+                this.db = new ScoutsDatabase();
+                this.currentUser = null;
+                this.currentEvaluatingBadge = null;
+                this.pendingLogoChanges = null;
+                this.init();
+            }
+
+            init() {
+                this.checkAuth();
+                this.setupEventListeners();
+                this.loadHomePage();
+                this.setupNavigation();
+                this.applySiteSettings(); // تطبيق إعدادات الموقع
+            }
+
+            // تطبيق إعدادات الموقع عند التحميل
+            applySiteSettings() {
+                const favicon = this.db.getFavicon();
+                const headerLogo = this.db.getHeaderLogo();
+                const logoText = this.db.getLogoText();
+
+                // تطبيق الفافيكون
+                if (favicon) {
+                    this.updateFavicon(favicon);
+                }
+
+                // تطبيق شعار الهيدر
+                if (headerLogo) {
+                    this.updateHeaderLogo(headerLogo);
+                }
+
+                // تطبيق نص الشعار
+                if (logoText && logoText !== 'بيت الكشافة العراقي') {
+                    this.updateLogoText(logoText);
+                }
+            }
+
+            updateFavicon(faviconData) {
+                // تحديث الفافيكون في الـ head
+                let favicon = document.querySelector("link[rel*='icon']");
+                if (!favicon) {
+                    favicon = document.createElement('link');
+                    favicon.rel = 'icon';
+                    document.head.appendChild(favicon);
+                }
+                favicon.href = faviconData;
+
+                // تحديث المعاينة
+                const preview = document.getElementById('currentFaviconPreview');
+                if (preview) {
+                    preview.innerHTML = `<img src="${faviconData}" alt="فافيكون الموقع">`;
+                }
+            }
+
+            updateHeaderLogo(logoData) {
+                // تحديث شعار الهيدر
+                const logoIcons = document.querySelectorAll('.logo-icon, .header-logo-icon');
+                logoIcons.forEach(icon => {
+                    icon.innerHTML = `<img src="${logoData}" alt="شعار الموقع">`;
+                });
+
+                // تحديث المعاينة
+                const preview = document.getElementById('currentHeaderLogoPreview');
+                if (preview) {
+                    preview.innerHTML = `<img src="${logoData}" alt="شعار الموقع">`;
+                }
+            }
+
+            updateLogoText(text) {
+                // تحديث نصوص الشعار في جميع أنحاء الموقع
+                const logoTexts = document.querySelectorAll('.logo-text h1, .footer-logo-text h3');
+                logoTexts.forEach(element => {
+                    element.textContent = text;
+                });
+
+                // تحديث العنوان
+                document.title = text + ' - قيادة، تراث، مستقبل';
+            }
+
+            setupEventListeners() {
+                // event listeners السابقة تبقى كما هي
+                
+                // إضافة event listeners جديدة لإدارة الموقع
+                document.getElementById('siteLogoForm').addEventListener('submit', (e) => this.handleSiteLogoChange(e));
+                document.getElementById('faviconFile').addEventListener('change', (e) => this.handleFaviconSelect(e));
+                document.getElementById('headerLogoFile').addEventListener('change', (e) => this.handleHeaderLogoSelect(e));
+            }
+
+            loadProfilePage() {
+                if (!this.currentUser) {
+                    this.showNotification('يرجى تسجيل الدخول أولاً', 'error');
+                    this.showPage('home');
+                    return;
+                }
+
+                this.loadProfileInfo();
+                this.loadProfileStats();
+                this.loadProfileDetails();
+                
+                // تحميل إدارة الكشافين إذا كان المستخدم قائداً
+                if (this.db.isUserLeader(this.currentUser)) {
+                    this.loadScoutsManagement();
+                    this.loadBadgesManagement();
+                }
+
+                // تحميل إدارة الموقع إذا كان المستخدم مسؤولاً
+                if (this.db.isUserAdmin(this.currentUser)) {
+                    this.loadSiteManagement();
+                }
+            }
+
+            loadSiteManagement() {
+                const siteManagement = document.getElementById('siteManagement');
+                siteManagement.style.display = 'block';
+                
+                this.loadCurrentLogos();
+            }
+
+            loadCurrentLogos() {
+                // تحميل الشعارات الحالية للمعاينة
+                const favicon = this.db.getFavicon();
+                const headerLogo = this.db.getHeaderLogo();
+
+                const faviconPreview = document.getElementById('currentFaviconPreview');
+                const headerLogoPreview = document.getElementById('currentHeaderLogoPreview');
+
+                if (favicon) {
+                    faviconPreview.innerHTML = `<img src="${favicon}" alt="فافيكون الموقع">`;
+                } else {
+                    faviconPreview.innerHTML = 'ك';
+                }
+
+                if (headerLogo) {
+                    headerLogoPreview.innerHTML = `<img src="${headerLogo}" alt="شعار الموقع">`;
+                } else {
+                    headerLogoPreview.innerHTML = 'ك';
+                }
+
+                // تحميل نص الشعار الحالي
+                const logoText = this.db.getLogoText();
+                document.getElementById('logoText').value = logoText;
+            }
+
+            handleFaviconSelect(e) {
+                const file = e.target.files[0];
+                const fileName = document.getElementById('faviconFileName');
+                const preview = document.getElementById('faviconPreview');
+                
+                if (file) {
+                    if (!file.type.startsWith('image/')) {
+                        this.showNotification('يرجى اختيار ملف صورة صحيح', 'error');
+                        e.target.value = '';
+                        fileName.textContent = 'PNG, JPG, SVG - 32x32 بكسل';
+                        return;
+                    }
+
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        preview.innerHTML = `<img src="${e.target.result}" alt="معاينة الفافيكون">`;
+                    };
+                    reader.readAsDataURL(file);
+
+                    fileName.textContent = `📷 ${file.name} (${this.formatFileSize(file.size)})`;
+                } else {
+                    fileName.textContent = 'PNG, JPG, SVG - 32x32 بكسل';
+                    preview.innerHTML = '<span>🖼️</span>';
+                }
+            }
+
+            handleHeaderLogoSelect(e) {
+                const file = e.target.files[0];
+                const fileName = document.getElementById('headerLogoFileName');
+                const preview = document.getElementById('headerLogoPreview');
+                
+                if (file) {
+                    if (!file.type.startsWith('image/')) {
+                        this.showNotification('يرجى اختيار ملف صورة صحيح', 'error');
+                        e.target.value = '';
+                        fileName.textContent = 'PNG, JPG - 50x50 بكسل';
+                        return;
+                    }
+
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        preview.innerHTML = `<img src="${e.target.result}" alt="معاينة الشعار">`;
+                    };
+                    reader.readAsDataURL(file);
+
+                    fileName.textContent = `📷 ${file.name} (${this.formatFileSize(file.size)})`;
+                } else {
+                    fileName.textContent = 'PNG, JPG - 50x50 بكسل';
+                    preview.innerHTML = '<span>🏕️</span>';
+                }
+            }
+
+            async handleSiteLogoChange(e) {
+                e.preventDefault();
+                
+                if (!this.db.isUserAdmin(this.currentUser)) {
+                    this.showNotification('غير مصرح لك بتغيير شعار الموقع', 'error');
+                    return;
+                }
+
+                const faviconFile = document.getElementById('faviconFile').files[0];
+                const headerLogoFile = document.getElementById('headerLogoFile').files[0];
+                const logoText = document.getElementById('logoText').value.trim();
+
+                const changes = {};
+
+                if (faviconFile) {
+                    changes.favicon = await this.db.storeFavicon(faviconFile);
+                }
+
+                if (headerLogoFile) {
+                    changes.headerLogo = await this.db.storeHeaderLogo(headerLogoFile);
+                }
+
+                if (logoText && logoText !== '') {
+                    changes.logoText = logoText;
+                }
+
+                if (Object.keys(changes).length === 0) {
+                    this.showNotification('لم تقم بإجراء أي تغييرات', 'info');
+                    return;
+                }
+
+                this.pendingLogoChanges = changes;
+                this.showModal('confirmLogoChangeModal');
+            }
+
+            async confirmLogoChange() {
+                if (this.pendingLogoChanges) {
+                    // حفظ التغييرات في قاعدة البيانات
+                    this.db.updateSiteSettings(this.pendingLogoChanges);
+
+                    // تطبيق التغييرات فوراً
+                    if (this.pendingLogoChanges.favicon) {
+                        this.updateFavicon(this.pendingLogoChanges.favicon);
+                    }
+
+                    if (this.pendingLogoChanges.headerLogo) {
+                        this.updateHeaderLogo(this.pendingLogoChanges.headerLogo);
+                    }
+
+                    if (this.pendingLogoChanges.logoText) {
+                        this.updateLogoText(this.pendingLogoChanges.logoText);
+                    }
+
+                    this.hideModal('confirmLogoChangeModal');
+                    this.showNotification('تم تغيير شعار الموقع بنجاح!', 'success');
+                    
+                    // إعادة تعيين النموذج
+                    document.getElementById('siteLogoForm').reset();
+                    document.getElementById('faviconPreview').innerHTML = '<span>🖼️</span>';
+                    document.getElementById('headerLogoPreview').innerHTML = '<span>🏕️</span>';
+                    document.getElementById('faviconFileName').textContent = 'PNG, JPG, SVG - 32x32 بكسل';
+                    document.getElementById('headerLogoFileName').textContent = 'PNG, JPG - 50x50 بكسل';
+
+                    this.pendingLogoChanges = null;
+                }
+            }
+
+            // ... بقية الدوال تبقى كما هي
+        }
+
+        // ... بقية الكود يبقى كما هو
+    </script>
+</body>
+</html>
